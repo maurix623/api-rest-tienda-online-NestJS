@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CategoriaModule } from './categoria/categoria.module';
 
 @Module({
   imports: [
@@ -14,7 +15,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       database: 'bd-tienda-online',
       autoLoadEntities: true, // Carga automáticamente las entidades
       synchronize: true, // Sincroniza la base de datos con las entidades 
-    })
+    }),
+    CategoriaModule
   ],
   controllers: [AppController],
   providers: [AppService],
