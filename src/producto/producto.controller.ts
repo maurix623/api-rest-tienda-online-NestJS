@@ -21,8 +21,8 @@ import { ProductoService } from './producto.service';
 import { CreateProductoDto } from './dto/create-producto.dto';
 import { UpdateProductoDto } from './dto/update-producto.dto';
 
-@ApiTags('productos')
-@Controller('productos')
+@ApiTags('producto')
+@Controller('producto')
 export class ProductoController {
   constructor(private readonly productoService: ProductoService) {}
 
