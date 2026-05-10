@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, DeleteDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Producto } from "src/producto/entities/producto.entity";
 
 @Entity()
 export class Categoria {
@@ -19,4 +20,7 @@ export class Categoria {
 
     @DeleteDateColumn()
     eliminadoEn: Date;  
+
+    @OneToMany(() => Producto, (producto) => producto.categoria, {onDelete: "CASCADE"})
+    producto: Producto[];
 }

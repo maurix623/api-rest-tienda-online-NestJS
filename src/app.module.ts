@@ -3,6 +3,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoriaModule } from './categoria/categoria.module';
+import { ProductoModule } from './producto/producto.module';
 
 @Module({
   imports: [
@@ -16,7 +17,8 @@ import { CategoriaModule } from './categoria/categoria.module';
       autoLoadEntities: true, // Carga automáticamente las entidades
       synchronize: true, // Sincroniza la base de datos con las entidades 
     }),
-    CategoriaModule
+    CategoriaModule,
+    ProductoModule
   ],
   controllers: [AppController],
   providers: [AppService],
