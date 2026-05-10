@@ -5,7 +5,9 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   Column,
+  OneToMany
 } from 'typeorm';
+import { Orden } from 'src/orden/entities/orden.entity';
 
 @Entity()
 export class Cliente {
@@ -32,4 +34,7 @@ export class Cliente {
 
   @DeleteDateColumn()
   eliminadoEn: Date;
+
+  @OneToMany(() => Orden, (orden) => orden.cliente)
+  orden: Orden[];
 }

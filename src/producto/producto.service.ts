@@ -25,17 +25,20 @@ export class ProductoService {
     }
     const producto = this.productoRepository.create({
       ...createProductoDto,
-      idProducto: createProductoDto.idCategoria,
+      idCategoria: createProductoDto.idCategoria,
     });
-    return this.productoRepository.save(producto);
+    return await this.productoRepository.save(producto);
   }
 
   async findAll() {
-    return await this.categoriaRepository.find({relations: ['producto'],});
+    return await this.productoRepository.find();
   }
 
   async findOne(id: number) {
-    const producto = await this.productoRepository.findOneBy({idProducto: id});
+    const producto = await this.productoRepository.findOne({
+      where: {idProducto: id},
+      relations: ['categoria']  
+    });
     if(!producto) throw new NotFoundException('Producto no encontrado')
     return producto;
   }
@@ -50,6 +53,6 @@ export class ProductoService {
     const producto = await this.productoRepository.findOneBy({idProducto: id});
     if(!producto) throw new NotFoundException('Producto no encontrado');
 
-    return await this.categoriaRepository.softDelete(id);
+    return await this.productoRepository.softDelete(id);
   }
 }

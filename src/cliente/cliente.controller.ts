@@ -21,8 +21,8 @@ import { ClienteService } from './cliente.service';
 import { CreateClienteDto } from './dto/create-cliente.dto';
 import { UpdateClienteDto } from './dto/update-cliente.dto';
 
-@ApiTags('clientes')
-@Controller('clientes')
+@ApiTags('cliente')
+@Controller('cliente')
 export class ClienteController {
   constructor(private readonly clienteService: ClienteService) {}
 

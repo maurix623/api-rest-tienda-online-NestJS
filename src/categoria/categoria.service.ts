@@ -23,19 +23,22 @@ export class CategoriaService {
     // select * from categoria
   }
 
-  async findOne(id: number): Promise<Categoria> {
-    const categoria = await this.categoriaRepository.findOneBy({
-      idCategoria: id,
+  async findOne(id: number) {
+    //mandar junto a sus productos
+    const categoria = await this.categoriaRepository.findOne({
+      where: { idCategoria: id },
+      relations: ['producto'],
     });
-
     if (!categoria) {
       throw new NotFoundException('Categoria no encontrada');
     }
-
     return categoria;
   }
 
-  async update(id: number,updateCategoriaDto: UpdateCategoriaDto,): Promise<Categoria> {
+  async update(
+    id: number,
+    updateCategoriaDto: UpdateCategoriaDto,
+  ): Promise<Categoria> {
     const categoria = await this.findOne(id);
 
     Object.assign(categoria, updateCategoriaDto);
