@@ -6,6 +6,7 @@ import { CategoriaModule } from './categoria/categoria.module';
 import { ProductoModule } from './producto/producto.module';
 import { ClienteModule } from './cliente/cliente.module';
 import { OrdenModule } from './orden/orden.module';
+import { OrdenProductoModule } from './orden_producto/orden_producto.module';
 
 @Module({
   imports: [
@@ -22,7 +23,8 @@ import { OrdenModule } from './orden/orden.module';
     CategoriaModule,
     ProductoModule,
     ClienteModule,
-    OrdenModule
+    OrdenModule,
+    OrdenProductoModule
   ],
   controllers: [AppController],
   providers: [AppService],

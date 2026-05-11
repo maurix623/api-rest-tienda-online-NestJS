@@ -28,14 +28,19 @@ export class OrdenService {
   }
 
   async findAll() {
-    return await this.ordenRepo.find();
+    return await this.ordenRepo.find({relations: ['ordenProductos.producto']});
   }
 
   async findOne(id: number) {
-    const orden = await this.ordenRepo.findOneBy({ idOrden: id });
-    if (!orden) throw new NotFoundException('Orden no encontrada');
+    const orden = await this.ordenRepo.findOne({
+      where: {idOrden: id},
+      relations: ['ordenProductos', 'ordenProductos.producto']
+    });
+    if(!orden) throw new NotFoundException('Orden no encontrada');
     return orden;
-  }
+    }
+
+
 
   async update(id: number, updateOrdenDto: UpdateOrdenDto) {
     const orden = await this.findOne(id);

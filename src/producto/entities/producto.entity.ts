@@ -7,8 +7,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   DeleteDateColumn,
+  OneToMany,
 } from 'typeorm';
 import { Categoria } from 'src/categoria/entities/categoria.entity';
+import { OrdenProducto } from 'src/orden_producto/entities/orden_producto.entity';
 
 @Entity()
 export class Producto {
@@ -42,4 +44,7 @@ export class Producto {
   @ManyToOne(() => Categoria, (categoria) => categoria.producto)
   @JoinColumn({ name: 'idCategoria' })
   categoria: Categoria;
+
+  @OneToMany(() => OrdenProducto, (ordenProducto) => ordenProducto.producto)
+  ordenProductos: OrdenProducto[];
 }
