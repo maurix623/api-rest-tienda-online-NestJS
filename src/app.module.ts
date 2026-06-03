@@ -7,18 +7,26 @@ import { ProductoModule } from './producto/producto.module';
 import { ClienteModule } from './cliente/cliente.module';
 import { OrdenModule } from './orden/orden.module';
 import { OrdenProductoModule } from './orden_producto/orden_producto.module';
+import { config } from 'process';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot({
-      type: 'postgres',
-      host : 'localhost',
-      port: 5432,
-      username: 'postgres',
-      password: '9923343',
-      database: 'bd-tienda-online',
-      autoLoadEntities: true, // Carga automáticamente las entidades
-      synchronize: true, // Sincroniza la base de datos con las entidades 
+    ConfigModule.forRoot({isGlobal: true}),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      useFactory: async (config: ConfigService) => ({
+        type: 'postgres',
+        host: config.get('DB_HOST'),
+        port: config.get<number>('DB_PORT'),
+        username: config.get('DB_USERNAME'),
+        password: config.get('DB_PASSWORD'),
+        database: config.get('DB_DATABASE'),
+        autoLoadEntities: true,
+        synchronize: true,
+      }),
+      inject: [ConfigService],
+      
     }),
     CategoriaModule,
     ProductoModule,
